@@ -12,7 +12,7 @@ const IndexPage = () => (
     <Hero
       title="WaffleHacks"
       subtitle="We're hackers with hearts"
-      action={{ text: "Register now!", link: "https://apply.wafflehacks.tech" }}
+      action={{ text: "Register now!", link: "https://apply.wafflehacks.org" }}
       image={true}
     />
     <Waves.GradientToWhite />

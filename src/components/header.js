@@ -93,7 +93,7 @@ const SmallNav = () => (
                 <a
                   id="navAction"
                   className="mx-4 mb-2 hover:underline font-bold rounded-full py-2 px-4 shadow opacity-75 gradient text-white text-sm text-center block"
-                  href="https://apply.wafflehacks.tech"
+                  href="https://apply.wafflehacks.org"
                 >
                   Register
                 </a>
@@ -142,7 +142,7 @@ const Header = () => (
         <a
           id="navAction"
           className="mx-auto lg:mx-0 hover:underline font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 gradient text-white"
-          href="https://apply.wafflehacks.tech"
+          href="https://apply.wafflehacks.org"
         >
           Register
         </a>

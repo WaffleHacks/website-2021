@@ -15,7 +15,7 @@ const PrivacyPolicyPage = () => (
 
     <section className="bg-white py-8 xl:px-40 md:px-10">
       <p className={BASE_TEXT}>
-        At WaffleHacks, accessible from wafflehacks.tech, one of our main
+        At WaffleHacks, accessible from wafflehacks.org, one of our main
         priorities is the privacy of our visitors. This Privacy Policy document
         contains types of information that is collected and recorded by
         WaffleHacks and how we use it.

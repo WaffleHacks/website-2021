@@ -3,7 +3,7 @@ module.exports = {
     title: "WaffleHacks",
     description: "We're hackers with hearts.",
     author: "@WaffleHacks",
-    siteUrl: "https://wafflehacks.tech",
+    siteUrl: "https://2021.wafflehacks.org",
     image: "/images/logo.png",
   },
   plugins: [
@@ -16,15 +16,17 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+/*
     {
       resolve: "@directus/gatsby-source-directus",
       options: {
-        url: "https://cms.wafflehacks.tech",
+        url: "https://cms.wafflehacks.org",
         dev: {
           refresh: "5m",
         },
       },
     },
+*/
     "gatsby-transformer-sharp",
     "gatsby-plugin-sharp",
     {
