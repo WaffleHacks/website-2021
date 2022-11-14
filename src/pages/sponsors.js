@@ -1,9 +1,17 @@
 import React, { Fragment } from "react"
-import { graphql, useStaticQuery } from "gatsby"
 
 import Layout from "../components/layout"
 import Hero from "../components/hero"
 import Waves from "../components/waves"
+
+import blueProtonLogo from "../images/sponsors/blueproton.png"
+import hyperXLogo from "../images/sponsors/hyperx.png"
+import persistNashvilleLogo from "../images/sponsors/persist-nashville.jpg"
+import replitLogo from "../images/sponsors/replit.png"
+import techTogetherChicagoLogo from "../images/sponsors/techtogether-chicago.png"
+import wolframLogo from "../images/sponsors/wolfram.png"
+
+import prospectus from "../images/sponsors/prospectus.pdf"
 
 const TIER_SETTINGS = {
   // TODO: update the logo sizes
@@ -19,32 +27,49 @@ const TIER_SETTINGS = {
   },
 }
 
-const query = graphql`
-  query Sponsors {
-    directus {
-      fields {
-        prospectus {
-          id
-          imageFile {
-            publicURL
-          }
-        }
-      }
-      sponsors(sort: "priority") {
-        id
-        name
-        tier
-        url
-        logo {
-          id
-          imageFile {
-            publicURL
-          }
-        }
-      }
-    }
-  }
-`
+const SPONSORS = {
+  platinum: [
+    {
+      name: "Wolfram",
+      url: "https://wolfram.com/",
+      logo: wolframLogo,
+      tier: "platinum",
+    },
+    {
+      name: "Replit",
+      url: "https://replit.com/",
+      logo: replitLogo,
+      tier: "platinum",
+    },
+    {
+      name: "BlueProton",
+      url: "https://blueproton.com",
+      logo: blueProtonLogo,
+      tier: "platinum",
+    },
+    {
+      name: "HyperX",
+      url: "https://www.hyperxgaming.com",
+      logo: hyperXLogo,
+      tier: "platinum",
+    },
+  ],
+  silver: [],
+  partner: [
+    {
+      name: "TechTogether Chicago",
+      url: "https://techtogether.io/chicago",
+      logo: techTogetherChicagoLogo,
+      tier: "partner",
+    },
+    {
+      name: "Persist Nashville",
+      url: "https://www.persistnashville.org/",
+      logo: persistNashvilleLogo,
+      tier: "partner",
+    },
+  ],
+}
 
 const Header = ({ title }) => (
   <>
@@ -62,7 +87,7 @@ const Sponsor = ({ tier, name, url, logo }) => (
     <div className="p-2 flex justify-center items-center">
       <a href={url} target="_blank" rel="noreferrer">
         <img
-          src={logo.imageFile.publicURL}
+          src={logo}
           alt={`${name}'s logo`}
           style={{ height: TIER_SETTINGS.LOGO_HEIGHT[tier] }}
         />
@@ -86,19 +111,6 @@ const SponsorsSection = ({ sponsors, tier }) => (
 )
 
 const SponsorsPage = () => {
-  // Get a list of all our sponsors
-  const {
-    directus: {
-      fields: { prospectus },
-      sponsors: ungrouped,
-    },
-  } = useStaticQuery(query)
-
-  // Extract the sponsor groups
-  const sponsors = { platinum: [], silver: [], partner: [] }
-  if (ungrouped !== null)
-    for (const sponsor of ungrouped) sponsors[sponsor.tier].push(sponsor)
-
   return (
     <Layout>
       <Hero title="Sponsors" image={false} />
@@ -111,7 +123,7 @@ const SponsorsPage = () => {
             Want to become a sponsor? Check out our&nbsp;
             <a
               className="text-yellow-600"
-              href={prospectus.imageFile.publicURL}
+              href={prospectus}
               rel="noreferrer"
               target="_blank"
             >
@@ -123,9 +135,9 @@ const SponsorsPage = () => {
           <br />
           <br />
 
-          {Object.keys(sponsors).map(k => (
+          {Object.keys(SPONSORS).map(k => (
             <Fragment key={k}>
-              <SponsorsSection sponsors={sponsors[k]} tier={k} />
+              <SponsorsSection sponsors={SPONSORS[k]} tier={k} />
               <br />
             </Fragment>
           ))}

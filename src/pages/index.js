@@ -22,7 +22,7 @@ const IndexPage = () => (
 
     <Waves.WhiteToGradient />
 
-    <CallToAction />
+    <CallToAction countdownTo="2021-08-27T21:00:11Z" />
   </Layout>
 )
 

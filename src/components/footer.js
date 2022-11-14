@@ -1,32 +1,62 @@
 import React from "react"
-import { graphql, useStaticQuery } from "gatsby"
 
 import waffleLogo from "../images/logo.png"
 
-const query = graphql`
-  query Footer {
-    directus {
-      footer {
-        categories {
-          name
-          links {
-            name
-            new_tab
-            url
-          }
-        }
-      }
-    }
-  }
-`
+const CATEGORIES = [
+  {
+    name: "Socials",
+    links: [
+      {
+        name: "Facebook",
+        newTab: true,
+        url: "https://www.facebook.com/WaffleHacks-103974901775671",
+      },
+      {
+        name: "Instagram",
+        newTab: true,
+        url: "https://www.instagram.com/waffle.hacks",
+      },
+      {
+        name: "Twitter",
+        newTab: true,
+        url: "https://twitter.com/WaffleHacks",
+      },
+      {
+        name: "LinkedIn",
+        newTab: true,
+        url: "https://www.linkedin.com/company/wafflehacks/about/",
+      },
+    ],
+  },
+  {
+    name: "Navigation",
+    links: [
+      {
+        name: "Home",
+        url: "/",
+      },
+      {
+        name: "Privacy Policy",
+        url: "/privacy-policy",
+      },
+      {
+        name: "Sponsors",
+        url: "/sponsors",
+      },
+      {
+        name: "Register",
+        newTab: true,
+        url: "https://apply.wafflehacks.org",
+      },
+      {
+        name: "Schedule",
+        url: "/schedule",
+      },
+    ],
+  },
+]
 
 const Footer = () => {
-  const {
-    directus: {
-      footer: { categories },
-    },
-  } = useStaticQuery(query)
-
   return (
     <footer className="bg-white">
       <div className="container mx-auto px-8">
@@ -45,7 +75,7 @@ const Footer = () => {
             </a>
           </div>
 
-          {categories.map(category => (
+          {CATEGORIES.map(category => (
             <div className="flex-1" key={category.name}>
               <p className="uppercase text-gray-500 md:mb-6">{category.name}</p>
 
@@ -58,7 +88,7 @@ const Footer = () => {
                     <a
                       href={link.url}
                       className="no-underline hover:underline text-gray-600 hover:text-yellow-600"
-                      target={link.new_tab ? "_blank" : "_self"}
+                      target={link.newTab ? "_blank" : "_self"}
                       rel="noreferrer"
                     >
                       {link.name}

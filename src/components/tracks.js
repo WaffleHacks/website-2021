@@ -1,25 +1,40 @@
 import React, { Fragment, useRef, useState } from "react"
 import { Dialog, Transition } from "@headlessui/react"
 
-import { useStaticQuery, graphql } from "gatsby"
+const TRACKS = [
+  {
+    name: "Education",
+    description:
+      "In the past year, education has looked different. Now, we rely on our computers to be our teachers. Whether it be connecting with our classmates on Zoom or learning new skills from online resources, we can all agree that educational technology is no longer the future. It is our present.",
+    questions: [
+      "How can technology help students host or create student-led events?",
+      "How can technology be used to introduce more students into STEM?",
+      "In what ways can classmates and students of simliar interests be connected?",
+    ],
+  },
+  {
+    name: "Small Businesses/Restaurants",
+    description:
+      "Small businesses and restaurants have had to face a new reality during the pandemic. The transition from having a lively customer experience to transactional interactions due to health and safety concerns was something we did not expect to happen. Some businesses and restaurants were able to adapt to these changes, while others suffered. With this, the way we conduct local business is no longer what it used to be.",
+    questions: [
+      "What can be done to promote small businesses/restaurants in the most effective way?",
+      "How can you improve a current system that a specific small business is using to be better?",
+      "What’s the best way to help your local small businesses/restaurants? How is technology involved?",
+    ],
+  },
+  {
+    name: "Student Food Insecurity",
+    description:
+      "During the pandemic, student food insecurity became more of a struggle than it was before lockdown. Students who relied on school lunches and meal plans were left with little to no options once schools across the nation shut down. Even with local and national organizations helping these students, things like safe distribution of food and accessibility to resources remain an issue.",
+    questions: [
+      "How can you make sure food distribution places can keep up with the ongoing need of the community?",
+      "How can the community get involved in food access and distribution resources?",
+      "What is the most important part of safe food distribution?",
+    ],
+  },
+]
 
-const query = graphql`
-  query Tracks {
-    directus {
-      tracks(sort: "name") {
-        description
-        name
-        id
-        questions {
-          content
-          id
-        }
-      }
-    }
-  }
-`
-
-const Card = ({ header, content, questions }) => {
+const Card = ({ name, description, questions }) => {
   const [open, setOpen] = useState(false)
   const cancelButtonRef = useRef()
 
@@ -71,21 +86,18 @@ const Card = ({ header, content, questions }) => {
                         as="h3"
                         className="text-3xl leading-6 font-medium text-gray-900"
                       >
-                        {header}
+                        {name}
                       </Dialog.Title>
                       <div className="mt-5">
-                        <div
-                          className="text-base text-gray-600"
-                          dangerouslySetInnerHTML={{ __html: content }}
-                        />
+                        <p className="text-base text-gray-600">{description}</p>
                         <br />
                         <h5 className="text-xl leading-3 font-medium mb-2">
                           Guiding Questions:
                         </h5>
                         <ul className="list-disc">
-                          {questions.map(q => (
-                            <li key={q.id} className="text-gray-600">
-                              {q.content}
+                          {questions.map((question, index) => (
+                            <li key={index} className="text-gray-600">
+                              {question}
                             </li>
                           ))}
                         </ul>
@@ -116,7 +128,7 @@ const Card = ({ header, content, questions }) => {
       >
         <div className="w-full flex-1 bg-white rounded-lg overflow-hidden bg-amber-50 hover:shadow-lg transition-shadow">
           <div className="w-full font-bold text-xl text-gray-800 p-6">
-            {header}
+            {name}
           </div>
         </div>
       </button>
@@ -125,10 +137,6 @@ const Card = ({ header, content, questions }) => {
 }
 
 const Tracks = () => {
-  const {
-    directus: { tracks },
-  } = useStaticQuery(query)
-
   return (
     <section className="bg-white py-8">
       <div className="container mx-auto flex flex-wrap pt-4 pb-12">
@@ -139,13 +147,8 @@ const Tracks = () => {
           <div className="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t" />
         </div>
 
-        {tracks.map(track => (
-          <Card
-            header={track.name}
-            content={track.description}
-            questions={track.questions}
-            key={track.id}
-          />
+        {TRACKS.map((track, index) => (
+          <Card key={index} {...track} />
         ))}
       </div>
     </section>

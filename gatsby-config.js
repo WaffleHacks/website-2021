@@ -16,7 +16,7 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
-/*
+    /*
     {
       resolve: "@directus/gatsby-source-directus",
       options: {
